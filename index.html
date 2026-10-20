@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thai Games</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #fffaf3;
+      color: #263b78;
+    }
+
+    nav {
+      background: white;
+      padding: 18px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px #00000010;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #263b78;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 65px 20px;
+      background: linear-gradient(135deg, #bde7ff, #fff0d8);
+    }
+
+    .hero h1 {
+      font-size: 54px;
+      margin: 0;
+    }
+
+    .hero p {
+      line-height: 1.8;
+      color: #536587;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 25px;
+      background: #354fa8;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+
+    .games {
+      padding: 35px 5%;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 1100px;
+      margin: 25px auto;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #eee8df;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 4px 12px #00000008;
+    }
+
+    .art {
+      border-radius: 14px;
+      padding: 25px 5px;
+      font-size: 55px;
+      background: #d9efff;
+    }
+
+    .card:nth-child(2) .art {
+      background: #f0ddff;
+    }
+
+    .card:nth-child(3) .art {
+      background: #d5f5e5;
+    }
+
+    .card p {
+      color: #78829a;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .play {
+      display: block;
+      background: #6981f2;
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 25px;
+      margin-top: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #e1efff;
+      color: #536587;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 15px;
+      }
+
+      nav a {
+        margin-left: 7px;
+        font-size: 13px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">🎮 Thai Games ✨</div>
+    <div>
+      <a href="#home">หน้าแรก</a>
+      <a href="#games">เกมทั้งหมด</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <h1>Thai Games</h1>
+    <h2>เล่นสนุก เรียนรู้ประเทศไทย</h2>
+    <p>รวมเกมสนุก ๆ ที่จะพาเธอไปรู้จักประเทศไทย<br>
+    เริ่มจากเกมทายจังหวัด แล้วพบกับเกมใหม่ ๆ อีกมากมาย</p>
+    <a class="button" href="#games">เริ่มเล่นกันเลย →</a>
+  </header>
+
+  <main class="games" id="games">
+    <h2>🎮 เกมของเรา</h2>
+    <p>เลือกเกมที่ชอบ แล้วเริ่มสนุกกันเลย!</p>
+
+    <div class="cards">
+      <article class="card">
+        <div class="art">🗺️</div>
+        <h3>ทายจังหวัด</h3>
+        <p>ทายชื่อจังหวัดจากแผนที่ประเทศไทย ทั้ง 77 จังหวัด</p>
+        <a class="play"
+           href="https://peeraatom-eng.github.io/thai-province-game/">
+          เล่นเลย →
+        </a>
+      </article>
+
+      <article class="card">
+        <div class="art">📸</div>
+        <h3>ทายภาพจังหวัด</h3>
+        <p>ดูภาพแล้วลองทายว่าสถานที่นั้นอยู่จังหวัดอะไร</p>
+        <a class="play" href="#coming">เร็ว ๆ นี้ →</a>
+      </article>
+
+      <article class="card">
+        <div class="art">🎨</div>
+        <h3>ไล่ระดับสีจังหวัด</h3>
+        <p>ใช้สีเป็นเบาะแสในการค้นหาจังหวัดเป้าหมาย</p>
+        <a class="play" href="#coming">เร็ว ๆ นี้ →</a>
+      </article>
+    </div>
+  </main>
+
+  <footer id="coming">
+    เล่นเกมสนุก ๆ ไปด้วยกันนะ ♡<br>
+    Thai Games | Made with ❤️ for Thailand
+  </footer>
+</body>
+</html>
