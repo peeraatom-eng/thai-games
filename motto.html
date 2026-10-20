@@ -157,4 +157,108 @@ const questions = [
 ["หนองคาย","วีรกรรมปราบฮ่อ หลวงพ่อพระใส สะพานไทย-ลาว"],
 ["หนองบัวลำภู","ศาลสมเด็จพระนเรศวรมหาราช อุทยานแห่งชาติภูเก้า-ภูพานคำ แผ่นดินธรรมหลวงปู่ขาว เด่นสกาวถ้ำเอราวัณ นครเขื่อนขันธ์กาบแก้วบัวบาน"],
 ["อ่างทอง","พระสมเด็จเกษไชโย หลวงพ่อโตองค์ใหญ่ วีรไทยใจกล้า ตุ๊กตาชาววัง โด่งดังจักสาน ถิ่นฐานทำกลอง เมืองสองพระนอน"],
-["อำนาจเจริญ","พระมงคลมิ่งเมือง แหล่งรุ่งเรืองเจ็ดลุ่มน้ำ งามล้ำถ้ำศักดิ์สิทธิ์ เทพนิมิตพระเหลา เกาะแก่งเขาแสนสวย เลอค่า
+["อำนาจเจริญ","พระมงคลมิ่งเมือง แหล่งรุ่งเรืองเจ็ดลุ่มน้ำ งามล้ำถ้ำศักดิ์สิทธิ์ เทพนิมิตพระเหลา เกาะแก่งเขาแสนสวย เลอค่าด้วยผ้าไหม ราษฎร์เลื่อมใสใฝ่ธรรม"],
+["อุดรธานี","กรมหลวงประจักษ์สร้างเมือง ลือเลื่องแหล่งธรรมะ อารยธรรมห้าพันปี ธานีผ้าหมี่ขิด ธรรมชาติเนรมิตทะเลบัวแดง"],
+["อุตรดิตถ์","เหล็กน้ำพี้ลือเลื่อง เมืองลางสาดหวาน บ้านพระยาพิชัยดาบหัก ถิ่นสักใหญ่ของโลก"],
+["อุทัยธานี","เมืองพระชนกจักรี ปลาแรดรสดี ประเพณีเทโว ส้มโอบ้านน้ำตก มรดกโลกห้วยขาแข้ง แหล่งต้นน้ำสะแกกรัง ตลาดนัดดังโคกระบือ"],
+["อุบลราชธานี","เมืองดอกบัวงาม แม่น้ำสองสี มีปลาแซ่บหลาย หาดทรายแก่งหิน"]
+];
+
+const $ = id => document.getElementById(id);
+let deck = [], index = 0, score = 0, answered = false;
+
+function normalize(text){
+  return text.trim().replace(/\s+/g,"").replace(/จังหวัด/g,"");
+}
+function shuffle(items){
+  const a = [...items];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function startGame(){
+  deck = shuffle(questions);
+  index = 0;
+  score = 0;
+  $("game").classList.remove("hidden");
+  $("result").classList.add("hidden");
+  showQuestion();
+}
+function showQuestion(){
+  if(index >= deck.length){ finish(); return; }
+  answered = false;
+  $("progress").textContent = `${index+1}/${deck.length}`;
+  $("score").textContent = score;
+  $("remaining").textContent = deck.length-index;
+  $("clue").textContent = deck[index][1];
+  $("answer").value = "";
+  $("answer").disabled = false;
+  $("check").disabled = false;
+  $("skip").disabled = false;
+  $("next").disabled = true;
+  $("feedback").textContent = "";
+  $("feedback").className = "";
+  $("answer").focus();
+}
+function checkAnswer(){
+  if(answered) return;
+  const guess = normalize($("answer").value);
+  if(!guess){
+    $("feedback").textContent = "พิมพ์ชื่อจังหวัดก่อนนะ 🙂";
+    $("feedback").className = "red";
+    return;
+  }
+  answered = true;
+  const correct = normalize(deck[index][0]);
+  if(guess === correct){
+    score++;
+    $("feedback").textContent = "ถูกต้อง! 🎉 จังหวัด"+deck[index][0];
+    $("feedback").className = "green";
+  }else{
+    $("feedback").textContent = "ยังไม่ถูกนะ คำตอบคือ "+deck[index][0];
+    $("feedback").className = "red";
+  }
+  $("score").textContent = score;
+  $("answer").disabled = true;
+  $("check").disabled = true;
+  $("skip").disabled = true;
+  $("next").disabled = false;
+  $("next").focus();
+}
+function skipQuestion(){
+  if(answered) return;
+  answered = true;
+  $("feedback").textContent = "ข้อนี้คือจังหวัด"+deck[index][0];
+  $("feedback").className = "";
+  $("answer").disabled = true;
+  $("check").disabled = true;
+  $("skip").disabled = true;
+  $("next").disabled = false;
+}
+function nextQuestion(){
+  if(!answered) return;
+  index++;
+  showQuestion();
+}
+function finish(){
+  $("game").classList.add("hidden");
+  $("result").classList.remove("hidden");
+  $("summary").textContent =
+    `ได้ ${score} จาก ${deck.length} คะแนน (${Math.round(score/deck.length*100)}%)`;
+}
+$("check").addEventListener("click",checkAnswer);
+$("skip").addEventListener("click",skipQuestion);
+$("next").addEventListener("click",nextQuestion);
+$("restart").addEventListener("click",startGame);
+$("answer").addEventListener("keydown",e=>{
+  if(e.key==="Enter"){
+    if(answered) nextQuestion();
+    else checkAnswer();
+  }
+});
+startGame();
+</script>
+</body>
+</html>
