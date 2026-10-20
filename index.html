@@ -3,192 +3,183 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thai Games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thai Games | เกมสนุก ๆ ของไทย</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: sans-serif;
-      background: #fffaf3;
-      color: #263b78;
+      min-height: 100vh;
+      font-family: Tahoma, sans-serif;
+      color: #26324b;
+      background: linear-gradient(135deg, #e0f2fe, #fce7f3, #ede9fe);
     }
 
-    nav {
-      background: white;
-      padding: 18px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 8px #00000010;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    nav a {
-      color: #263b78;
-      text-decoration: none;
-      margin-left: 15px;
-    }
-
-    .hero {
+    header {
       text-align: center;
-      padding: 65px 20px;
-      background: linear-gradient(135deg, #bde7ff, #fff0d8);
+      padding: 55px 20px 35px;
     }
 
-    .hero h1 {
-      font-size: 54px;
-      margin: 0;
+    header .emoji {
+      font-size: 48px;
     }
 
-    .hero p {
+    h1 {
+      margin: 12px 0;
+      font-size: clamp(30px, 6vw, 44px);
+      color: #6d28d9;
+    }
+
+    header p {
       line-height: 1.8;
-      color: #536587;
+      color: #59657a;
     }
 
-    .button {
-      display: inline-block;
-      padding: 12px 25px;
-      background: #354fa8;
-      color: white;
-      border-radius: 30px;
-      text-decoration: none;
-      margin-top: 10px;
+    main {
+      width: min(1050px, 92%);
+      margin: 0 auto 50px;
     }
 
     .games {
-      padding: 35px 5%;
-      text-align: center;
-    }
-
-    .cards {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      max-width: 1100px;
-      margin: 25px auto;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
     }
 
     .card {
-      background: white;
-      border: 1px solid #eee8df;
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: 0 4px 12px #00000008;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #ffffff;
+      border-radius: 22px;
+      padding: 25px;
+      box-shadow: 0 8px 25px rgba(72, 61, 139, 0.10);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 30px rgba(72, 61, 139, 0.16);
     }
 
     .art {
-      border-radius: 14px;
-      padding: 25px 5px;
-      font-size: 55px;
-      background: #d9efff;
+      font-size: 48px;
+      margin-bottom: 12px;
     }
 
-    .card:nth-child(2) .art {
-      background: #f0ddff;
-    }
-
-    .card:nth-child(3) .art {
-      background: #d5f5e5;
+    h2 {
+      font-size: 22px;
+      margin: 5px 0 10px;
     }
 
     .card p {
-      color: #78829a;
-      line-height: 1.7;
-      font-size: 14px;
+      color: #64748b;
+      line-height: 1.8;
+      flex-grow: 1;
     }
 
     .play {
       display: block;
-      background: #6981f2;
-      color: white;
+      padding: 13px;
+      margin-top: 12px;
+      border-radius: 12px;
+      text-align: center;
       text-decoration: none;
-      padding: 10px;
-      border-radius: 25px;
-      margin-top: 15px;
+      font-weight: bold;
+      background: #7c3aed;
+      color: white;
+    }
+
+    .play:hover {
+      background: #6d28d9;
+    }
+
+    .blue .play {
+      background: #2563eb;
+    }
+
+    .pink .play {
+      background: #db2777;
+    }
+
+    .purple .play {
+      background: #7c3aed;
+    }
+
+    .coming {
+      background: #e2e8f0;
+      color: #64748b;
+      cursor: default;
     }
 
     footer {
       text-align: center;
-      padding: 25px;
-      background: #e1efff;
-      color: #536587;
-    }
-
-    @media (max-width: 700px) {
-      nav {
-        padding: 15px;
-      }
-
-      nav a {
-        margin-left: 7px;
-        font-size: 13px;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
+      padding: 25px 15px 35px;
+      color: #64748b;
+      line-height: 2;
     }
   </style>
 </head>
 
 <body>
-  <nav>
-    <div class="logo">🎮 Thai Games ✨</div>
-    <div>
-      <a href="#home">หน้าแรก</a>
-      <a href="#games">เกมทั้งหมด</a>
-    </div>
-  </nav>
-
-  <header class="hero" id="home">
+  <header>
+    <div class="emoji">🇹🇭 🎮</div>
     <h1>Thai Games</h1>
-    <h2>เล่นสนุก เรียนรู้ประเทศไทย</h2>
-    <p>รวมเกมสนุก ๆ ที่จะพาเธอไปรู้จักประเทศไทย<br>
-    เริ่มจากเกมทายจังหวัด แล้วพบกับเกมใหม่ ๆ อีกมากมาย</p>
-    <a class="button" href="#games">เริ่มเล่นกันเลย →</a>
+    <p>
+      พื้นที่รวมเกมสนุก ๆ เกี่ยวกับประเทศไทย<br>
+      มาเล่นและเรียนรู้ไปด้วยกันนะ ♡
+    </p>
   </header>
 
-  <main class="games" id="games">
-    <h2>🎮 เกมของเรา</h2>
-    <p>เลือกเกมที่ชอบ แล้วเริ่มสนุกกันเลย!</p>
+  <main>
+    <section class="games">
 
-    <div class="cards">
-      <article class="card">
+      <!-- เกมที่ 1: ไล่ระดับสีจังหวัด -->
+      <article class="card blue">
         <div class="art">🗺️</div>
-        <h3>ทายจังหวัด</h3>
-        <p>ทายชื่อจังหวัดจากแผนที่ประเทศไทย ทั้ง 77 จังหวัด</p>
+        <h2>ไล่ระดับสีจังหวัด</h2>
+        <p>
+          ใช้สีเป็นเบาะแสในการค้นหาจังหวัดเป้าหมาย
+          ยิ่งใกล้ สีจะยิ่งเข้มขึ้น
+        </p>
         <a class="play"
            href="https://peeraatom-eng.github.io/thai-province-game/">
           เล่นเลย →
         </a>
       </article>
 
-      <article class="card">
-        <div class="art">📸</div>
-        <h3>ทายภาพจังหวัด</h3>
-        <p>ดูภาพแล้วลองทายว่าสถานที่นั้นอยู่จังหวัดอะไร</p>
-        <a class="play" href="#coming">เร็ว ๆ นี้ →</a>
+      <!-- เกมที่ 2: ทายภาพจังหวัด -->
+      <article class="card pink">
+        <div class="art">🖼️</div>
+        <h2>ทายภาพจังหวัด</h2>
+        <p>
+          ดูภาพและลองทายว่าภาพนั้นเกี่ยวข้องกับจังหวัดใด
+        </p>
+        <a class="play coming"
+           href="#coming"
+           aria-disabled="true">
+          เร็ว ๆ นี้
+        </a>
       </article>
 
-      <article class="card">
-        
-<article class="card">
-  <div class="art">✍️</div>
-  <h3>ทายคำขวัญจังหวัด</h3>
-  <p>อ่านคำขวัญ แล้วพิมพ์ชื่อจังหวัดให้ถูกต้อง</p>
-  <a class="play" href="motto.html">เล่นเลย →</a>
-</article>
+      <!-- เกมที่ 3: ทายคำขวัญจังหวัด -->
+      <article class="card purple">
+        <div class="art">✍️</div>
+        <h2>ทายคำขวัญจังหวัด</h2>
+        <p>
+          อ่านคำขวัญ แล้วพิมพ์ชื่อจังหวัดให้ถูกต้อง
+          มาทดสอบความรู้เกี่ยวกับประเทศไทยกัน!
+        </p>
+        <a class="play" href="motto.html">
+          เล่นเลย →
+        </a>
+      </article>
 
-    </div>
+    </section>
   </main>
 
   <footer id="coming">
